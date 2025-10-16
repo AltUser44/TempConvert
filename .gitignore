@@ -1,0 +1,8 @@
+.vs/
+x64/
+*.vsidx
+*.suo
+*.db
+*.ipch
+*.opendb
+*.user
