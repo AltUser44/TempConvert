@@ -4,7 +4,7 @@
  * Date: 10/02/2025
  
  * Purpose of Program:
- *  - Read city and average annual temperature (°F) from FahrenheitTemperature.txt
+ *  - Read city and average annual temperature (ï¿½F) from FahrenheitTemperature.txt
  *  - Convert each temperature to Celsius using:  (F - 32) * 5 / 9
  *  - Write "City CelsiusTemp" to CelsiusTemperature.txt, one city per line
  */
@@ -14,11 +14,20 @@
 #include <string>       // std::string
 #include <cmath>        // std::lround
 #include <iomanip>      // (kept if you prefer formatting tweaks later)
+#include <direct.h>     // for _getcwd
+#include <cstdlib>     // for size_t
 
 int main() {
-    // --- File names ---
-    const std::string kInputFile = "FahrenheitTemperature.txt";
-    const std::string kOutputFile = "CelsiusTemperature.txt";
+    // Get the current working directory
+    char currentPath[_MAX_PATH];
+    if (_getcwd(currentPath, _MAX_PATH) == nullptr) {
+        std::cerr << "Error: Could not get current working directory.\n";
+        return 1;
+    }
+    
+    // --- File names with full paths ---
+    const std::string kInputFile = std::string(currentPath) + "\\FahrenheitTemperature.txt";
+    const std::string kOutputFile = std::string(currentPath) + "\\CelsiusTemperature.txt";
 
     // --- Open input file for reading ---
     std::ifstream fin(kInputFile);
